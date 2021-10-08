@@ -1,6 +1,5 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const express = require('express')
 
 axios('https://www.theverge.com/')
   .then(res => {
@@ -8,9 +7,9 @@ axios('https://www.theverge.com/')
     const chr = cheerio.load(data)
     const articles = []
 
-    chr(".c-entry-box--compact__title", data).each(function() {
-      const title = chr(this).text()
-      const url = chr(this).find('a').attr('href')
+    chr(".c-entry-box--compact__title", data).each((i, el) => {
+      const title = chr(el).text()
+      const url = chr(el).find('a').attr('href')
       articles.push({
         title,
         url
